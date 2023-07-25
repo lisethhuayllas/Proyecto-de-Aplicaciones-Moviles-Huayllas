@@ -1,0 +1,7 @@
+{
+  "name": "VENUS",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
