@@ -1,0 +1,27 @@
+<ion-header class="publicaciones-header">
+  <ion-toolbar>
+    <ion-title>Publicaciones</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="logout()">Cerrar sesión</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/agregar-publicacion">Agregar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="publicaciones-content">
+  <ion-card *ngFor="let publicacion of publicaciones" class="publicacion-card">
+    <ion-card-subtitle>Publicado por {{ publicacion.nombre_usuario }}</ion-card-subtitle>
+    <ion-card-subtitle>{{ publicacion.fecha_publicacion }}</ion-card-subtitle>
+    <ion-card-subtitle>{{ publicacion.nombre_publicacion }}</ion-card-subtitle>
+    <ion-card-title>{{ publicacion.comentario }}</ion-card-title>
+    
+    <div class="publicacion-opciones">
+      <ion-icon name="chatbubble-outline"></ion-icon>
+      <ion-icon name="thumbs-up-outline"></ion-icon>
+      <ion-icon name="thumbs-down-outline"></ion-icon>
+      <ion-icon name="share-outline"></ion-icon>
+    </div>
+  </ion-card>
+</ion-content>
