@@ -1,0 +1,68 @@
+.custom-menu ion-item {
+  color: black;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;   
+}
+
+.centered-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px; /* Ajusta el ancho según tus necesidades */
+  height: 180px; 
+}
+
+.centered-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.centered-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.centered-text {
+  text-align: center;
+  color: rgb(102, 20, 164); /* Color morado */
+}
+
+.centered-text h2 {
+  color: rgb(102, 20, 164); /* Color morado */
+  margin-bottom: 10px;
+}
+
+.centered-text p {
+  color: black; /* Color negro */
+  margin-bottom: 20px;
+}
+
+.custom-button {
+  width: 50%; /* Ajusta el ancho según tus necesidades */
+  max-width: 200px; /* Ajusta el ancho máximo según tus necesidades */
+  margin-top: 10px; /* Ajusta el margen superior según tus necesidades */
+}
+
+.icon_facebook{
+  color: blue;
+  font-size: 30px; 
+}
+
+.icon_whatsapp{
+  color: green;
+  font-size: 30px; 
+}
+
+.icon_instagram{
+  color: pink;
+  font-size: 30px; 
+}

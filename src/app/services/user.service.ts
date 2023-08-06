@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, updateProfile } from '@angular/fire/auth';
-import { Firestore, collection, getDocs, setDoc, doc, query, orderBy, getDoc, deleteDoc, updateDoc, serverTimestamp } from '@angular/fire/firestore';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider } from '@angular/fire/auth';
+import { Firestore, collection, getDocs, setDoc, doc, query, orderBy, getDoc, where, deleteDoc, updateDoc, serverTimestamp } from '@angular/fire/firestore';
 import { Usuario } from '../models/usuarios.model';   //Modelo de USUARIOS
 
 
@@ -94,5 +94,45 @@ export class UserService {
       return null;
     }
   }
+
+
+ // Si el correo que ingreso ya está en uso
+ async getUserDataByEmail(email: string): Promise<Usuario | null> {
+  try {
+    const querySnapshot = await getDocs(query(collection(this.firestore, 'usuario'), where('email', '==', email)));
+    if (!querySnapshot.empty) {
+      const userData = querySnapshot.docs[0].data() as Usuario;
+      return userData;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+
+async actualizarUsuario(userId: string, userData: Usuario) {
+  try {
+    const usuarioDocRef = doc(this.firestore, "usuario", userId);
+    const updatedData: Partial<Usuario> = {
+      nombres: userData.nombres,
+      apellidos: userData.apellidos,
+      descripcion: userData.descripcion,
+      // Add other fields that you want to update
+    };
+
+    // Validate that the form fields have valid values before updating
+    if (updatedData.nombres && updatedData.apellidos && updatedData.descripcion) {
+      await updateDoc(usuarioDocRef, updatedData);
+    } else {
+      console.error("Some form fields have invalid values.");
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
 
 }

@@ -1,0 +1,35 @@
+/* Estilo para los campos de entrada */
+ion-input,
+ion-select {
+  --ion-color: #800080; /* Color morado */
+}
+
+/* Estilo para el botón de capturar foto */
+ion-button.nopadding {
+  --background: transparent; /* Fondo transparente */
+  --color: #800080; /* Color morado */
+  --border-radius: 50%; /* Bordes redondeados */
+  --box-shadow: none; /* Sin sombra */
+  --padding-start: 0; /* Sin padding en los lados */
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+}
+
+/* Estilo para el título de la sección */
+.label-input-title {
+  color: #800080; /* Color morado */
+}
+
+/* Estilo para el icono de cámara */
+.icono-camara {
+  color: #800080; /* Color morado */
+  font-size: 24px;
+}
+
+/* Estilo para los botones de acción */
+ion-button.round-button {
+  --background: #800080; /* Color morado */
+  --color: white; /* Texto en blanco */
+  --border-radius: 20px; /* Bordes redondeados */
+}

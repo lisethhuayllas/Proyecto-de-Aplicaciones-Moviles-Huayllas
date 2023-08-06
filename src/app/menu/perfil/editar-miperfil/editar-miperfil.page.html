@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="miperfil"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Editar Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-card-content>
+      <form [formGroup]="profileForm" (ngSubmit)="guardarCambios()">
+
+        <div class="profile-photo-container">
+          <ion-img class="profile-photo" [src]="rutaParaFoto"></ion-img>
+          <ion-icon class="camera-icon" name="camera" (click)="capturarFoto()"></ion-icon>
+        </div>
+
+        <ion-item>
+          <ion-label class="purple-text">Nombre:</ion-label>
+          <ion-input class="data-text"  formControlName="nombres" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label class="purple-text">Apellidos:</ion-label>
+          <ion-input  class="data-text"formControlName="apellidos" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label class="purple-text">Descripción:</ion-label>
+          <ion-textarea  class="data-text" formControlName="descripcion"></ion-textarea>
+        </ion-item>
+
+        <ion-button  type="submit">Guardar cambios</ion-button>
+      </form>
+    </ion-card-content>
+
+</ion-content>

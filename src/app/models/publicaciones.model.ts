@@ -5,17 +5,25 @@ export interface Publicacion {
     archivo: string;
     fecha_publicacion: string;
     usuario: string;
-    nombre_usuario?: string; // Agrega el campo nombre_usuario con '?' para que sea opcional
+    estado: 'publico' | 'privado'; 
+    likes: number;
+    dislikes: number;
   }
 
-export const publicacionConverter = {
+  export const publicacionConverter = {
     toFirestore: (publicacion: any) => {
         return <Publicacion>{
             nombre_publicacion: publicacion.nombre_publicacion,
             comentario: publicacion.comentario,
             archivo: publicacion.archivo,
+            fecha_publicacion: publicacion.fecha_publicacion,
+            usuario: publicacion.usuario,
+            estado: publicacion.estado,
+            likes: publicacion.likes,
+            dislikes: publicacion.dislikes,
         };
     },
+
     fromFirestore: (snapshot: any, options: any) => {
         const data = snapshot.data(options);
         return <Publicacion>{
@@ -23,6 +31,11 @@ export const publicacionConverter = {
             nombre_publicacion: data.nombre_publicacion,
             comentario: data.comentario,
             archivo: data.archivo,
+            fecha_publicacion: data.fecha_publicacion,
+            usuario: data.usuario,
+            estado: data.estado,
+            likes: data.likes,
+            dislikes: data.dislikes,
         };
     }
 };

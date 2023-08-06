@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/about"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Tus Publicaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding-left padding-top>
+  <ion-list #slidingList>
+    <ion-item-sliding *ngFor="let publicacion of publicaciones">
+      <ion-card class="publicacion-card">
+        <ion-item routerDirection="forward" [routerLink]="['/', 'agregar-mispublicaciones', publicacion.publicacionId]">
+          <ion-card-content>
+            <ion-thumbnail class="publicacion-thumbnail">
+              <ion-img [src]="publicacion.archivo"></ion-img>
+            </ion-thumbnail>
+            <h2>Nombre Foto: <span class="nombre-foto">{{ publicacion.nombre_publicacion }}</span></h2>
+            <p>Fecha: <span class="fecha">{{ publicacion.fecha_publicacion }}</span></p>
+            <p>Comentario: <span class="comentario">{{ publicacion.comentario }}</span></p>
+            <p>Estado: <span class="estado"></span> {{ publicacion.estado }}</p>
+          </ion-card-content>
+        </ion-item>
+      </ion-card>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-fab vertical="top" horizontal="end" slot="fixed" edge="true">
+    <ion-fab-button routerDirection="forward" [routerLink]="['/agregar-mispublicaciones/-1']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

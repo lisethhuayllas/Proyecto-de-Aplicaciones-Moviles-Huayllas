@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup , Validators} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
-
+import { ToastController } from '@ionic/angular';
 import { Usuario } from '../models/usuarios.model';
 import { AlertController } from '@ionic/angular';
+
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.page.html',
@@ -14,7 +15,12 @@ export class RegistroPage implements OnInit {
   formReg: FormGroup;
   showPassword = false;
 
-  constructor(private userService: UserService, private router: Router,  private alertController: AlertController) {
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private alertController: AlertController,
+    private toastController: ToastController
+  ) {
     this.formReg = new FormGroup({
       nombres: new FormControl('', Validators.required),
       apellidos: new FormControl('', Validators.required),
@@ -26,16 +32,18 @@ export class RegistroPage implements OnInit {
 
   ngOnInit() {}
 
-  onSubmit() {
+  async onSubmit() {
     if (this.formReg.valid) {
       // Obtén los datos del formulario
       const nuevoUsuario: Usuario = {
-        userId: '', // No es necesario proporcionar el ID aquí, ya que Firebase Auth generará uno automáticamente
+        userId: '', // Firebase Auth generará idddd
         nombres: this.formReg.value.nombres,
         apellidos: this.formReg.value.apellidos,
         email: this.formReg.value.email,
         password: this.formReg.value.password,
-        usuario: '',
+        descripcion: 'Aún no tienes descripción',
+        foto: '', //
+        nacimiento: new Date()
       };
 
       // Verificar si las contraseñas coinciden
@@ -44,21 +52,32 @@ export class RegistroPage implements OnInit {
         return;
       }
 
+      // Verificar si el correo electrónico ya está registrado
+      const existingUser = await this.userService.getUserDataByEmail(nuevoUsuario.email);
+      if (existingUser) {
+        this.mostrarAlertaError('El correo electrónico ya está registrado.');
+        return;
+      }
+
       // Registra al nuevo usuario en Firebase Auth
-      this.userService
-        .registrarUsuario({ email: nuevoUsuario.email, password: nuevoUsuario.password })
-        .then((userCredential) => {
-          // El usuario se ha registrado correctamente en Firebase Auth
-          const user = userCredential.user;
-          // Agrega los datos adicionales del usuario en la colección "usuario" de Firestore
-          nuevoUsuario.userId = user.uid; // Asignamos el ID generado por Firebase Auth al objeto de Usuario
-          return this.userService.agregarNuevoUsuario(nuevoUsuario);
-        })
-        .then(response => {
-          console.log(response);
-          this.router.navigate(['/login']);
-        })
-        .catch(error => console.log(error));
+      try {
+        const userCredential = await this.userService.registrarUsuario({
+          email: nuevoUsuario.email,
+          password: nuevoUsuario.password,
+        });
+
+        // El usuario se ha registrado correctamente en Firebase Auth
+        const user = userCredential.user;
+
+       
+        nuevoUsuario.userId = user.uid; 
+        await this.userService.agregarNuevoUsuario(nuevoUsuario);
+
+        this.router.navigate(['/login']);
+      } catch (error) {
+        console.error(error);
+        this.mostrarAlertaError('Ha ocurrido un error durante el registro.');
+      }
     } else {
       this.mostrarAlertaError('Por favor, completa todos los campos.');
     }

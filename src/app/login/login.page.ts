@@ -41,7 +41,7 @@ export class LoginPage implements OnInit {
         const response = await this.userService.loginWithEmailPassword(email, password);
         console.log(response);
         await this.mostrarMensajeBienvenida();
-        this.router.navigate(['/inicio']);
+        this.router.navigate(['/about']);
       } catch (error) {
         console.log(error);
         await this.mostrarAlertaError("El correo electrónico o la contraseña son incorrectos.");
@@ -55,7 +55,7 @@ export class LoginPage implements OnInit {
     this.userService.loginWithGoogle()
       .then(response => {
         console.log(response);
-        this.router.navigate(['/inicio']);
+        this.router.navigate(['/about']);
       })
       .catch(error => console.log(error))
   }

@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="mispublicaciones"></ion-back-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+ 
+  <ng-container *ngIf="publicacionForm">
+    <form [formGroup]="publicacionForm" (submit)="submit()">
+      <ion-item lines="none" [disabled]="!modoDeEdicion">
+        <ion-label position="floating" class="label-input-title">Nombre de Publicación</ion-label>
+        <ion-input formControlName="nombre_publicacion" type="text" style="margin-left: 3%;"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none" [disabled]="!modoDeEdicion">
+        <ion-label position="floating" class="label-input-title">Comentario</ion-label>
+        <ion-input formControlName="comentario" type="text" style="margin-left: 3%;"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none" [disabled]="!modoDeEdicion">
+        <ion-label class="label-input-title">Estado</ion-label>
+        <ion-select formControlName="estado" interface="popover">
+          <ion-select-option value="publico">Público</ion-select-option>
+          <ion-select-option value="privado">Privado</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <div *ngIf="modoDeEdicion">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-3>
+            </ion-col>
+
+            <ion-col col-6>
+              <ion-button class="nopadding" shape="round" color="primary" size="small" expand="block" (click)="capturarFoto()">
+                <ion-icon class="icono-camara" name="camera"></ion-icon>
+              </ion-button>
+            </ion-col>
+
+            <ion-col col-3>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+
+      <ion-button *ngIf="!modoDeEdicion" shape="round" color="primary" expand="block" padding
+        (click)="iniciarEdicion()">
+        Modificar datos
+      </ion-button>
+      <div *ngIf="modoDeEdicion" no-padding>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-6>
+              <ion-button shape="round" color="success"size="small" padding expand="block" type="submit">
+                Guardar
+              </ion-button>
+            </ion-col>
+
+            <ion-col col-6>
+              <ion-button shape="round" color="medium" size="small" padding expand="block" (click)="cancelarEdicion()">
+                Cancelar
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </form>
+  </ng-container>
+</ion-content>

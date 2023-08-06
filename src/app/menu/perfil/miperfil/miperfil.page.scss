@@ -1,0 +1,23 @@
+.profile-info-row {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.purple-text {
+  color: purple;
+  font-weight: bold;
+}
+
+.title-text {
+  margin-right: 10px;
+}
+
+.data-text {
+  color: #999; /* Color menos intenso */
+}
+
+.centered-button {
+  display: block;
+  margin: 20px auto;
+}

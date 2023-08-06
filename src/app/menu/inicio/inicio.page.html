@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="miperfil"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Inicio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="publicaciones-content">
+  <ion-toolbar>
+    <ion-segment >
+      <ion-segment-button value="todos" checked>
+        <ion-label>Todas</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="likes">
+        <ion-label>Más Likes</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="dislikes">
+        <ion-label>Menos Likes</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+  <ion-card *ngFor="let publicacion of publicaciones" class="publicacion-card">
+    <ion-card-subtitle class="fecha">Publicada el: {{ publicacion.fecha_publicacion }}</ion-card-subtitle>
+    <ion-card-title class="nombre">{{ publicacion.nombre_publicacion }}</ion-card-title>
+    <ion-card-content class="comentario">{{ publicacion.comentario }}</ion-card-content>
+    
+    <div class="publicacion-opciones">
+      <ion-icon
+        [name]="publicacion.likes ? 'thumbs-up' : 'thumbs-up-outline'"
+        class="like icon-grande"
+        (click)="darLike(publicacion)"
+      >
+      </ion-icon>
+      <span class="icon-text">{{ publicacion.likes }} Likes</span>
+
+      <ion-icon
+        [name]="publicacion.dislikes ? 'thumbs-down' : 'thumbs-down-outline'"
+        class="dislike icon-grande"
+        (click)="darDislike(publicacion)"
+      >
+      </ion-icon>
+      <span class="icon-text">{{ publicacion.dislikes }} Dislikes</span>
+
+      <ion-icon ios="share" name="share-outline" class="compartir icon-grande" (click)="compartir()"></ion-icon>
+    </div>
+  </ion-card>
+</ion-content>

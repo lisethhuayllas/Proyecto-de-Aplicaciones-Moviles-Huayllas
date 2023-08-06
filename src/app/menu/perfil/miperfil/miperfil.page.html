@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="about"></ion-back-button>
+    </ion-buttons>
+    <ion-title>TU PERFIL</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card-content>
+    <div class="profile-container">
+      <div class="profile-image">
+        <img src="assets/icon/user.png" alt="Imagen de login">
+      </div>
+      <div class="profile-info">
+        <div class="profile-info-row">
+          <ion-label class="purple-text title-text">Nombre:</ion-label>
+          <ion-label class="data-text">{{ usuarioActual?.nombres }}</ion-label>
+        </div>
+        <div class="profile-info-row">
+          <ion-label class="purple-text title-text">Apellidos:</ion-label>
+          <ion-label class="data-text">{{ usuarioActual?.apellidos }}</ion-label>
+        </div>
+        <div class="profile-info-row">
+          <ion-label class="purple-text title-text">Email:</ion-label>
+          <ion-label class="data-text">{{ usuarioActual?.email }}</ion-label>
+        </div>
+        <div class="profile-info-row">
+          <ion-label class="purple-text title-text">Descripción:</ion-label>
+          <ion-label class="data-text">{{ usuarioActual?.descripcion }}</ion-label>
+        </div>
+      </div>
+    </div>
+
+    <ion-button class="custom-button centered-button" (click)="completarDatos()">
+      Completar otros datos
+    </ion-button>
+  </ion-card-content>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="primary" class="ion-justify-content-center">
+      <ion-button (click)="logout()">Cerrar Sesión</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
